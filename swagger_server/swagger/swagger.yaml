@@ -1,0 +1,65 @@
+openapi: 3.0.0
+info:
+  title: Load Service
+  description: Convert Parameters to Loads
+  version: 0.0.1
+servers:
+- url: /
+tags:
+- name: Load
+paths:
+  /loads:
+    put:
+      tags:
+      - Load
+      summary: Convert Parameter Inputs to Load Outputs
+      description: Transform Parameter Data to Loads Data
+      operationId: get_loads_from_parameters
+      requestBody:
+        description: Optional description in *Markdown*
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParameterList'
+        required: true
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoadList'
+      x-openapi-router-controller: swagger_server.controllers.load_controller
+components:
+  schemas:
+    ParameterList:
+      type: object
+      properties:
+        param1:
+          type: number
+          description: Parameter 1
+        param2:
+          type: number
+          description: Parameter 2
+        param3:
+          type: number
+          description: Parameter 3
+      description: This is the Parameter model
+    LoadList:
+      type: object
+      properties:
+        load1:
+          type: number
+          description: Load 1
+        load2:
+          type: number
+          description: Load 2
+        load3:
+          type: number
+          description: Load 3
+      description: This is the Load model
+      example:
+        load3: 1.4
+        load2: 450
+        load1: 2.5
+
